@@ -8,6 +8,25 @@
 /* #include "memcached.h" */
 /* #include "slabs.h" */
 
+typedef struct {
+    unsigned int size;      /* sizes of items */
+    unsigned int perslab;   /* how many items per slab */
+
+    void *slots;           /* list of item ptrs */
+    unsigned int sl_curr;   /* total free items in list */
+
+    unsigned int slabs;     /* how many slabs were allocated for this class */
+
+    void **slab_list;       /* array of slab pointers */
+    unsigned int list_size; /* size of prev array */
+
+    unsigned int killing;  /* index+1 of dying slab, or zero if none */
+    size_t requested; /* The number of requested bytes */
+} slabclass_t;
+
+static slabclass_t slabclass[MAX_NUMBER_OF_SLAB_CLASSES];
+
+
 #define TESTTIME 10000
 
 /* 
