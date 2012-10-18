@@ -8,6 +8,8 @@
 /* #include "memcached.h" */
 /* #include "slabs.h" */
 
+#define MAX_NUMBER_OF_SLAB_CLASSES 200
+
 typedef struct {
     unsigned int size;      /* sizes of items */
     unsigned int perslab;   /* how many items per slab */
@@ -27,7 +29,8 @@ typedef struct {
 static slabclass_t slabclass[MAX_NUMBER_OF_SLAB_CLASSES];
 
 
-#define TESTTIME 10000
+#define TESTTIME 100000000
+#define power_largest MAX_NUMBER_OF_SLAB_CLASSES
 
 /* 
  * Required slabs_lock
